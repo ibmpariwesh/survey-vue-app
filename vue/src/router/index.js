@@ -9,12 +9,13 @@ import Survey from '../views/Survey.vue';
 import Surveys from '../views/Surveys.vue';
 import Answer from '../views/Answer.vue';
 import Answers from '../views/Answers.vue';
+import AboutC from '../components/AboutC.vue';
 import store from '../store';
 
 const routes = [
   {
     path: '/view/survey/:id/:slug',
-    name: 'SurveyPublic',
+    name: 'SurveyPublic', //named routes
     component: SurveyPublicView
   },
   {
@@ -25,6 +26,11 @@ const routes = [
     children: [
       { path: '/dashboard', name: 'Dashboard', component: Dashboard },
       { path: '/surveys', name: 'Surveys', component: Surveys },
+      {
+        path: '/about',
+        name: 'about', //named routes
+        component: AboutC
+      },
       { path: '/surveys/create', name: 'SurveyCreate', component: Survey },
       { path: '/survey/:id?', name: 'Survey', component: Survey },
       { path: '/answers/:query?', name: 'Answers', component: Answers },
@@ -50,7 +56,7 @@ const routes = [
       },
     ]
   },
-  { 
+  {
     path: '/:pathMatch(.*)*',//Wildcard routes
     redirect: '/login',
     name: 'NotFound',
@@ -65,9 +71,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {//Navigation Guards
-  if(to.meta.requiresAuth && !store.state.user.token) {
+  if (to.meta.requiresAuth && !store.state.user.token) {
     next({ name: 'Login' })
-  } else if(store.state.user.token && to.meta.isGuest) {
+  } else if (store.state.user.token && to.meta.isGuest) {
     next({ name: 'Dashboard' })
   } else {
     next()
