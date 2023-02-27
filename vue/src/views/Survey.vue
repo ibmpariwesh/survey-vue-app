@@ -106,6 +106,24 @@
               />
             </div>
           </div>
+
+          <div>
+            <label for="creator" class="block text-sm font-medium text-gray-700">
+              Creator
+            </label>
+            <div class="mt-1">
+              <textarea
+                id="creator"
+                name="creator"
+                rows="4"
+                v-model="model.creator"
+                autocomplete="creator"
+                class="shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                placeholder="who created this survey?"
+              />
+            </div>
+          </div>
+
           <div>
             <label for="expire_at" class="block text-sm font-medium text-gray-700"
               >Expire Date</label
